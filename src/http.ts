@@ -4,13 +4,26 @@ import express from 'express';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 
-import { DEFAULT_PORT } from './config.js';
+import { DEFAULT_BASE_URL, DEFAULT_PORT, SERVER_NAME, SERVER_VERSION } from './config.js';
 import { createMayaoMcpServer } from './server.js';
 
 const app = express();
 app.use(express.json());
 
 const transports = new Map<string, StreamableHTTPServerTransport>();
+
+app.get('/', (_req, res) => {
+  res.json({
+    service: SERVER_NAME,
+    version: SERVER_VERSION,
+    status: 'ok',
+    endpoints: {
+      root: `${DEFAULT_BASE_URL}/`,
+      health: `${DEFAULT_BASE_URL}/health`,
+      mcp: `${DEFAULT_BASE_URL}/mcp`,
+    },
+  });
+});
 
 app.get('/health', (_req, res) => {
   res.json({ ok: true });
