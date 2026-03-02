@@ -1,0 +1,1648 @@
+{
+  "Button": {
+    "name": "Button",
+    "description": "Компонент кнопки с поддержкой иконок, различных стилей и размеров.",
+    "props": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает кнопку, делая её неактивной."
+      },
+      {
+        "name": "icon",
+        "type": "IconProps",
+        "default": "undefined",
+        "description": "Объект иконки: { id, width, height, className, stroke, fill, onClick }"
+      },
+      {
+        "name": "iconLocation",
+        "type": "'Left' | 'Right'",
+        "default": "'Right'",
+        "description": "Расположение иконки относительно текста."
+      },
+      {
+        "name": "iconSize",
+        "type": "number",
+        "default": "undefined",
+        "description": "Размер иконки в пикселях."
+      },
+      {
+        "name": "onClick",
+        "type": "(event: MouseEvent<HTMLButtonElement>) => void",
+        "default": "undefined",
+        "description": "Функция-обработчик клика по кнопке."
+      },
+      {
+        "name": "onMouseOver",
+        "type": "(event: MouseEvent<HTMLButtonElement>) => void",
+        "default": "undefined",
+        "description": "Функция-обработчик события наведения мыши."
+      },
+      {
+        "name": "onFocus",
+        "type": "(event: FocusEvent<HTMLButtonElement>) => void",
+        "default": "undefined",
+        "description": "Функция-обработчик события фокуса на кнопке."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Дополнительные CSS-классы."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "default": "undefined",
+        "description": "Контент, отображаемый внутри кнопки."
+      },
+      {
+        "name": "visible",
+        "type": "boolean",
+        "default": "true",
+        "description": "Определяет, видима ли кнопка."
+      },
+      {
+        "name": "renderAs",
+        "type": "'button' | 'a' | 'div'",
+        "default": "Определяется автоматически",
+        "description": "Тип рендера HTML-элемента. Если btnType === 'Link', то рендерится как <a>."
+      },
+      {
+        "name": "rounded",
+        "type": "boolean",
+        "default": "false",
+        "description": "Делает кнопку с закруглёнными краями."
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": "undefined",
+        "description": "Если передан, используется как ссылка для renderAs='a'."
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSObject",
+        "default": "{}",
+        "description": "Переопределение внутренних стилей кнопки (styled-components)."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "Текст для всплывающей подсказки (атрибут title)."
+      },
+      {
+        "name": "btnSize",
+        "type": "'M' | 'S'",
+        "default": "'M'",
+        "description": "Размер кнопки: Medium (M) или Small (S)."
+      },
+      {
+        "name": "btnType",
+        "type": "'Primary' | 'Secondary' | 'Warning' | 'Remove' | 'Success' | 'Minimal' | 'Link'",
+        "default": "'Primary'",
+        "description": "Тип кнопки, определяющий её стиль."
+      },
+      {
+        "name": "disableHover",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает hover-стили кнопки."
+      }
+    ],
+    "examples": [
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Primary} onClick={() => alert('Primary')}>\n  Primary\n</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Secondary} onClick={() => alert('Secondary')}>\n  Secondary\n</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Minimal} onClick={() => alert('Minimal')}>\n  Minimal\n</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Link} href=\"https://example.com\" title=\"Go to example\">\n  Link\n</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Warning}>Warning</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Remove}>Remove</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\n\n<Button btnType={ButtonType.Success}>Success</Button>",
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\nimport { IconLocation } from '@mayao/mayao-ui/core/IconLocation';\nimport SearchIcon from '@/assets/icons/bc_magnifier.svg?react';\n\n<Button btnType={ButtonType.Primary} icon={{ id: SearchIcon }} iconLocation={IconLocation.Left}>\n  Поиск\n</Button>",
+      "import { Button, ButtonSize } from '@mayao/mayao-ui/core/Button';\nimport Checked from '@/assets/icons/bc_checkedCheckbox.svg?react';\n\n<Button btnSize={ButtonSize.M} icon={{ id: Checked }} iconSize={40} title=\"Edit\" />"
+    ]
+  },
+  "Checkbox": {
+    "name": "Checkbox",
+    "description": "Компонент флажка (чекбокса) или переключателя (toggle) с меткой и настройками размеров.",
+    "props": [
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Дополнительные CSS-классы для контейнера чекбокса."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Текстовая метка рядом с чекбоксом."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает чекбокс, делая его неактивным для взаимодействия."
+      },
+      {
+        "name": "isChecked",
+        "type": "boolean",
+        "description": "Определяет, выбран ли чекбокс."
+      },
+      {
+        "name": "isReadOnly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Делает чекбокс только для чтения — нельзя изменить состояние вручную."
+      },
+      {
+        "name": "isCheckedSubOptions",
+        "type": "boolean",
+        "default": "true",
+        "description": "Определяет, использовать ли альтернативную иконку (например, квадратную) при отображении состояния 'выбрано'."
+      },
+      {
+        "name": "onChange",
+        "type": "(e: React.ChangeEvent<HTMLInputElement>) => void",
+        "description": "Функция-обработчик изменения состояния чекбокса."
+      },
+      {
+        "name": "isToggle",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отображает чекбокс в виде переключателя (toggle)."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "Имя чекбокса, передаваемое в форму."
+      },
+      {
+        "name": "checkboxSize",
+        "type": "'M' | 'S'",
+        "default": "'S'",
+        "description": "Размер чекбокса: Medium или Small."
+      }
+    ],
+    "examples": [
+      "import { Checkbox } from '@mayao/mayao-ui/core/Checkbox';\n\n<Checkbox label=\"Обычный чекбокс\" isChecked={true} onChange={(e) => console.log(e.target.checked)} />",
+      "import { Checkbox } from '@mayao/mayao-ui/core/Checkbox';\n\n<Checkbox label=\"Тумблер\" isChecked={false} onChange={(e) => console.log(e.target.checked)} isToggle />",
+      "import { Checkbox } from '@mayao/mayao-ui/core/Checkbox';\n\n<Checkbox label=\"Только для чтения\" isChecked={true} isReadOnly />",
+      "import { Checkbox } from '@mayao/mayao-ui/core/Checkbox';\n\n<Checkbox label=\"Заблокированный\" isChecked={false} isDisabled />"
+    ]
+  },
+  "ColorPicker": {
+    "name": "ColorPicker",
+    "description": "Компонент выбора цвета с отображением текущего цвета, предустановками и попапом выбора через палитру.",
+    "props": [
+      {
+        "name": "color",
+        "type": "{ hex: string; rgb: { r: number; g: number; b: number; a?: number } }",
+        "default": "—",
+        "description": "Текущий выбранный цвет. Поддерживает HEX и RGB форматы."
+      },
+      {
+        "name": "onChange",
+        "type": "(color: { hex: string; rgb: { r: number; g: number; b: number; a?: number } }) => void",
+        "default": "—",
+        "description": "Функция, вызываемая при изменении цвета. Возвращает объект с hex и rgb."
+      }
+    ],
+    "examples": [
+      "import { ColorPicker } from '@mayao/mayao-ui/core/ColorPicker';\n\n<ColorPicker\n  color={{ hex: '#4A90E2', rgb: { r: 74, g: 144, b: 226, a: 1 } }}\n  onChange={(color) => console.log(color)}\n/>"
+    ]
+  },
+  "Confirm": {
+    "name": "Confirm",
+    "description": "Компонент модального окна подтверждения с сообщением, заголовком и кнопками действия.",
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Заголовок модального окна."
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "description": "Сообщение или основной текст окна."
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "description": "Флаг, указывающий, открыто ли модальное окно."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "description": "Функция, вызываемая при закрытии окна."
+      },
+      {
+        "name": "onConfirm",
+        "type": "() => void",
+        "description": "Функция, вызываемая при подтверждении действия."
+      },
+      {
+        "name": "confirmButtonText",
+        "type": "'Ок' | string",
+        "default": "'Ок'",
+        "description": "Текст кнопки подтверждения."
+      },
+      {
+        "name": "cancelButtonText",
+        "type": "'Отмена' | string",
+        "default": "'Отмена'",
+        "description": "Текст кнопки отмены."
+      },
+      {
+        "name": "hideCloseButton",
+        "type": "boolean",
+        "default": "false",
+        "description": "Скрывает кнопку закрытия в заголовке модального окна."
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSObject",
+        "default": "{ background: Colors.AthensGray }",
+        "description": "Кастомные стили, передаваемые модальному окну через styled-components."
+      },
+      {
+        "name": "disableConfirmButton",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает кнопку подтверждения."
+      },
+      {
+        "name": "showCancelButton",
+        "type": "boolean",
+        "default": "true",
+        "description": "Показывает кнопку отмены рядом с кнопкой подтверждения."
+      },
+      {
+        "name": "portalTarget",
+        "type": "HTMLElement",
+        "default": "undefined",
+        "description": "DOM-элемент, в который будет смонтировано модальное окно через портал."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Confirm } from '@mayao/mayao-ui/core/Confirm';\nimport { Button, BUTTON_TEXT, ButtonType } from '@mayao/mayao-ui/core/Button';\n\nconst Example = () => {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <>\n      <Button btnType={ButtonType.Success} onClick={() => setIsOpen(true)}>\n        Открыть Confirm\n      </Button>\n\n      <Confirm\n        isOpen={isOpen}\n        title=\"Подтверждение\"\n        message=\"Вы уверены, что хотите продолжить?\"\n        onClose={() => setIsOpen(false)}\n        onConfirm={() => {\n          alert('Подтверждено!');\n          setIsOpen(false);\n        }}\n        confirmButtonText={BUTTON_TEXT.confirm}\n        cancelButtonText={BUTTON_TEXT.cancel}\n        showCancelButton\n      />\n    </>\n  );\n};"
+    ]
+  },
+  "DatePicker": {
+    "name": "DatePicker",
+    "description": "Компонент выбора даты, отображаемый в модальном окне с календарём и кнопками подтверждения.",
+    "props": [
+      {
+        "name": "selectedDate",
+        "type": "Date | undefined",
+        "default": "undefined",
+        "description": "Текущая выбранная дата. Отображается при открытии календаря."
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": "false",
+        "description": "Определяет, открыта ли модалка выбора даты."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "default": "—",
+        "description": "Функция, вызываемая при закрытии модального окна без выбора даты."
+      },
+      {
+        "name": "onDatePickerChange",
+        "type": "(newDate?: Date) => void",
+        "default": "undefined",
+        "description": "Функция, вызываемая при подтверждении новой даты (по кнопке 'Ок')."
+      },
+      {
+        "name": "menuPortalTarget",
+        "type": "HTMLElement",
+        "default": "undefined",
+        "description": "DOM-элемент для портала модального окна DatePicker."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Button } from '@mayao/mayao-ui/core/Button';\nimport { DatePicker } from '@mayao/mayao-ui/core/DatePicker';\n\nconst Example = () => {\n  const [date, setDate] = useState(new Date());\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <>\n      <Button onClick={() => setIsOpen(true)}>Открыть календарь</Button>\n\n      <DatePicker\n        isOpen={isOpen}\n        selectedDate={date}\n        onClose={() => setIsOpen(false)}\n        onDatePickerChange={(newDate) => {\n          setDate(newDate);\n          setIsOpen(false);\n        }}\n      />\n    </>\n  );\n};"
+    ]
+  },
+  "DateRangePicker": {
+    "name": "DateRangePicker",
+    "description": "Компонент выбора диапазона дат с поддержкой ручного ввода, времени, сброса и кастомного отображения.",
+    "props": [
+      {
+        "name": "selectedRange",
+        "type": "(Date | string)[] | undefined",
+        "default": "undefined",
+        "description": "Текущий выбранный диапазон дат. Ожидается массив из двух значений: начало и конец периода."
+      },
+      {
+        "name": "defaultStartDate",
+        "type": "Date",
+        "default": "undefined",
+        "description": "Дата начала по умолчанию (не используется в текущей реализации)."
+      },
+      {
+        "name": "defaultEndDate",
+        "type": "Date",
+        "default": "undefined",
+        "description": "Дата окончания по умолчанию (не используется в текущей реализации)."
+      },
+      {
+        "name": "isReadonly",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает взаимодействие с выбором даты. Поле становится недоступным для редактирования."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Кастомные классы для обёртки компонента."
+      },
+      {
+        "name": "onRangePickerChange",
+        "type": "(newDates?: (Date | string)[]) => void",
+        "default": "undefined",
+        "description": "Функция, вызываемая при подтверждении нового диапазона. Возвращает массив из двух значений."
+      },
+      {
+        "name": "isOpenModal",
+        "type": "boolean",
+        "default": "false",
+        "description": "Открывает модальное окно с календарём программно."
+      },
+      {
+        "name": "hideTime",
+        "type": "boolean",
+        "default": "false",
+        "description": "Скрывает выбор времени и работает только с датой."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Button } from '@mayao/mayao-ui/core/Button';\nimport { DateRangePicker } from '@mayao/mayao-ui/core/DateRangePicker';\n\nconst Example = () => {\n  const [range, setRange] = useState([new Date(), new Date()]);\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <>\n      <Button onClick={() => setIsOpen(true)}>Открыть выбор диапазона</Button>\n\n      <DateRangePicker\n        selectedRange={range}\n        isOpenModal={isOpen}\n        onRangePickerChange={(newRange) => {\n          setRange(newRange);\n          setIsOpen(false);\n        }}\n      />\n    </>\n  );\n};"
+    ]
+  },
+  "DateTextInput": {
+    "name": "DateTextInput",
+    "description": "Поле ввода даты с форматированием, маской, автокоррекцией и валидацией. Поддерживает ввод в формате dd.mm.yyyy.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "Уникальный идентификатор поля."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "undefined",
+        "description": "Подпись для поля ввода."
+      },
+      {
+        "name": "value",
+        "type": "Date | string",
+        "default": "undefined",
+        "description": "Текущее значение даты. Может быть объектом Date или строкой (ISO формат)."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Кастомные CSS-классы."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "false",
+        "description": "Признак наличия ошибки. Меняет цвет поля."
+      },
+      {
+        "name": "inputSize",
+        "type": "'S' | 'L'",
+        "default": "'L'",
+        "description": "Размер поля ввода. Значения: 'S' — компактный, 'L' — стандартный."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: string) => void",
+        "default": "undefined",
+        "description": "Функция, вызываемая при каждом изменении ввода. Возвращает необработанную строку."
+      },
+      {
+        "name": "onUpdateDate",
+        "type": "(d: string) => void",
+        "default": "undefined",
+        "description": "Функция, вызываемая при потере фокуса или успешной валидации даты. Возвращает строку в формате yyyy-mm-dd или пустую строку."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { DateTextInput } from '@mayao/mayao-ui/core/DateTextInput';\n\nconst Example = () => {\n  const [date, setDate] = useState('');\n\n  return (\n    <DateTextInput\n      id=\"date-text\"\n      label=\"Введите дату\"\n      value={date}\n      onUpdateDate={(d) => setDate(d)}\n      hasError={false}\n    />\n  );\n};",
+      "import { DateTextInput } from '@mayao/mayao-ui/core/DateTextInput';\n\n<DateTextInput\n  id=\"date-error\"\n  label=\"Неверная дата\"\n  value=\"31.02.2024\"\n  onUpdateDate={() => {}}\n  hasError\n/>"
+    ]
+  },
+  "Icon": {
+    "name": "Icon",
+    "description": "Универсальный SVG-икон компонент. Использует спрайт с символами (через <use>). Поддерживает управление размерами, цветами и кликом.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "Идентификатор символа в SVG-спрайте. Пример: 'check', 'close'."
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "default": "16",
+        "description": "Ширина иконки в пикселях."
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "default": "width",
+        "description": "Высота иконки. По умолчанию равна ширине."
+      },
+      {
+        "name": "fill",
+        "type": "string",
+        "default": "undefined",
+        "description": "Цвет заливки (fill) для SVG."
+      },
+      {
+        "name": "stroke",
+        "type": "string",
+        "default": "undefined",
+        "description": "Цвет обводки (stroke) для SVG."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "CSS-классы для иконки."
+      },
+      {
+        "name": "onClick",
+        "type": "(e: SyntheticEvent) => void",
+        "default": "undefined",
+        "description": "Обработчик клика по иконке."
+      },
+      {
+        "name": "isActive",
+        "type": "boolean",
+        "default": "false",
+        "description": "Флаг активности иконки (используется в styled-вариантах)."
+      }
+    ],
+    "examples": [
+      "import SearchIcon from '@/assets/icons/bc_checkedCheckbox.svg?react';\nimport { Icon } from '@mayao/mayao-ui/core/Icon';\n\n<Icon id={SearchIcon} width={36} height={36} />"
+    ]
+  },
+  "Input": {
+    "name": "Input",
+    "description": "Текстовое поле ввода с поддержкой лейбла, иконок, состояний ошибок и различных размеров.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "required": true,
+        "description": "Уникальный идентификатор input."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Метка, отображаемая над/внутри поля ввода."
+      },
+      {
+        "name": "value",
+        "type": "string | number | ReadonlyArray<string>",
+        "default": "—",
+        "description": "Значение поля ввода."
+      },
+      {
+        "name": "onChange",
+        "type": "(event: ChangeEvent<HTMLInputElement>) => void",
+        "default": "—",
+        "description": "Обработчик изменения значения."
+      },
+      {
+        "name": "inputSize",
+        "type": "'S' | 'M' | 'L'",
+        "default": "'L'",
+        "description": "Размер поля: маленький, средний или большой."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "false",
+        "description": "Флаг ошибки валидации."
+      },
+      {
+        "name": "errorText",
+        "type": "string",
+        "default": "—",
+        "description": "Текст ошибки, отображаемый под полем."
+      },
+      {
+        "name": "resetErrorState",
+        "type": "() => void",
+        "default": "—",
+        "description": "Функция сброса состояния ошибки (вызовется при onChange)."
+      },
+      {
+        "name": "icon",
+        "type": "IconElement",
+        "default": "—",
+        "description": "Иконка, отображаемая справа внутри поля."
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "default": "—",
+        "description": "URL изображения, отображаемого слева внутри поля."
+      },
+      {
+        "name": "isCapitalizeFirstLetter",
+        "type": "boolean",
+        "default": "false",
+        "description": "Если true — первая буква значения будет автоматически преобразована в заглавную."
+      },
+      {
+        "name": "isLabelFixed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Если true — label всегда отображается над полем."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "—",
+        "description": "Кастомные CSS-классы."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Input, InputSizes } from '@mayao/mayao-ui/core/Input';\n\nconst Example = () => {\n  const [value, setValue] = useState('');\n\n  return (\n    <Input\n      id=\"input1\"\n      label=\"Стандартный\"\n      value={value}\n      onChange={(e) => setValue(e.target.value)}\n      inputSize={InputSizes.L}\n    />\n  );\n};",
+      "import { Input, InputSizes } from '@mayao/mayao-ui/core/Input';\n\n<Input\n  id=\"input2\"\n  label=\"С ошибкой\"\n  value=\"\"\n  onChange={() => {}}\n  hasError={true}\n  errorText=\"Ошибка\"\n  inputSize={InputSizes.L}\n/>",
+      "import { Input, InputSizes } from '@mayao/mayao-ui/core/Input';\n\n<Input\n  id=\"input3\"\n  label=\"Заблокированный\"\n  value=\"Нельзя редактировать\"\n  disabled\n  hasError={true}\n  inputSize={InputSizes.S}\n/>"
+    ]
+  },
+  "Loader": {
+    "name": "Loader",
+    "description": "Компонент для отображения анимированного индикатора загрузки. Поддерживает различные размеры, цветовые варианты и кастомный текст.",
+    "props": [
+      {
+        "name": "loaderSize",
+        "type": "'S' | 'M' | 'XL'",
+        "default": "'M'",
+        "description": "Размер индикатора: маленький (S), средний (M), или большой (XL)."
+      },
+      {
+        "name": "loaderType",
+        "type": "'Primary' | 'Secondary' | 'Warning' | 'Success' | 'Danger'",
+        "default": "'Primary'",
+        "description": "Цветовая схема лоадера. Использует предустановленные цвета согласно типу."
+      },
+      {
+        "name": "loaderColor",
+        "type": "string",
+        "default": "—",
+        "description": "Кастомный цвет верхней границы лоадера (перекрывает loaderType)."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "—",
+        "description": "Текст или элементы, отображаемые под лоадером (например, \"Загрузка...\")."
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSObject",
+        "default": "—",
+        "description": "Кастомные CSS-стили для контейнера лоадера."
+      }
+    ],
+    "examples": [
+      "import { Loader, LoaderType, LoaderSize } from '@mayao/mayao-ui/core/Loader';\n\n<Loader loaderType={LoaderType.Primary} loaderSize={LoaderSize.S} />",
+      "import { Loader, LoaderType, LoaderSize } from '@mayao/mayao-ui/core/Loader';\n\n<Loader loaderType={LoaderType.Warning} loaderSize={LoaderSize.M} />",
+      "import { Loader, LoaderType, LoaderSize } from '@mayao/mayao-ui/core/Loader';\n\n<Loader loaderType={LoaderType.Success} loaderSize={LoaderSize.XL} />"
+    ]
+  },
+  "Modal": {
+    "name": "Modal",
+    "description": "Переиспользуемый модальный компонент с поддержкой центрированного и сайдбарного расположения, размеров, заголовков, футеров и позиционирования.",
+    "props": [
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": "false",
+        "description": "Флаг отображения модального окна."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "default": "—",
+        "description": "Функция закрытия модального окна."
+      },
+      {
+        "name": "children",
+        "type": "React.ReactNode",
+        "default": "—",
+        "description": "Контент, отображаемый внутри модального окна."
+      },
+      {
+        "name": "footer",
+        "type": "React.ReactNode",
+        "default": "—",
+        "description": "Контент нижней части модального окна, например, кнопки действий."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "—",
+        "description": "Заголовок модального окна."
+      },
+      {
+        "name": "subTitle",
+        "type": "string",
+        "default": "—",
+        "description": "Подзаголовок модального окна."
+      },
+      {
+        "name": "hideCloseButton",
+        "type": "boolean",
+        "default": "false",
+        "description": "Скрыть ли кнопку закрытия (крестик)."
+      },
+      {
+        "name": "closeOnOverlayClick",
+        "type": "boolean",
+        "default": "true",
+        "description": "Закрывать ли модалку при клике на оверлей."
+      },
+      {
+        "name": "modalType",
+        "type": "'SideBarModal' | 'CenteredModal'",
+        "default": "'SideBarModal'",
+        "description": "Тип модального окна — сбоку или центрированное."
+      },
+      {
+        "name": "modalSize",
+        "type": "'XS' | 'S' | 'M' | 'C' | 'L'",
+        "default": "depends on modalType",
+        "description": "Размер модального окна. Используется только с типом 'CenteredModal'."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "default": "depends on modalSize",
+        "description": "Ширина модального окна. Переопределяет размер, если задан."
+      },
+      {
+        "name": "maxHeight",
+        "type": "string | number",
+        "default": "depends on modalSize",
+        "description": "Максимальная высота модального окна."
+      },
+      {
+        "name": "customStyles",
+        "type": "CSSObject",
+        "default": "—",
+        "description": "Дополнительные CSS-стили для модального окна."
+      },
+      {
+        "name": "layoutFlexCentered",
+        "type": "'top' | 'center' | 'bottom' | 'stretch'",
+        "default": "—",
+        "description": "Вертикальное выравнивание контента внутри модального окна."
+      },
+      {
+        "name": "modalPosition",
+        "type": "'top' | 'center' | 'bottom' | 'left' | 'right'",
+        "default": "'center'",
+        "description": "Позиция появления модального окна на экране (для CenteredModal)."
+      },
+      {
+        "name": "menuPortalTarget",
+        "type": "HTMLElement",
+        "default": "undefined",
+        "description": "Совместимый alias для цели портала в ряде интеграций."
+      },
+      {
+        "name": "portalTarget",
+        "type": "HTMLElement",
+        "default": "undefined",
+        "description": "DOM-элемент, в который будет смонтировано модальное окно через портал."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\nimport { Modal, ModalType, ModalSize } from '@mayao/mayao-ui/core/Modal';\n\nconst Example = () => {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <>\n      <Button btnType={ButtonType.Primary} onClick={() => setIsOpen(true)}>\n        Открыть модалку\n      </Button>\n\n      <Modal\n        isOpen={isOpen}\n        onClose={() => setIsOpen(false)}\n        modalType={ModalType.CenteredModal}\n        modalSize={ModalSize.C}\n        title=\"Пример модального окна\"\n        subTitle=\"Это подзаголовок\"\n      >\n        Здесь может быть любой контент!\n      </Modal>\n    </>\n  );\n};"
+    ]
+  },
+  "Notification": {
+    "name": "Notification",
+    "description": "Глобальная система всплывающих уведомлений с автозакрытием и поддержкой разных типов сообщений. Использует event-based архитектуру для добавления и удаления уведомлений.",
+    "installation": {
+      "steps": [
+        "1. Импортируйте и отобразите компонент <NotificationContainer /> один раз в корне приложения (обычно рядом с <App />).",
+        "2. Для показа уведомлений используйте API NotificationManager.notification({ ... }).",
+        "3. Для удаления всех уведомлений используйте NotificationManager.removeAll()."
+      ]
+    },
+    "components": [
+      {
+        "name": "NotificationContainer",
+        "description": "Компонент, слушающий глобальные события и рендерящий список уведомлений через createPortal.",
+        "usage": "<NotificationContainer />"
+      }
+    ],
+    "api": {
+      "NotificationManager": {
+        "methods": [
+          {
+            "name": "notification",
+            "description": "Показывает новое уведомление.",
+            "params": [
+              {
+                "name": "notification",
+                "type": "NotificationParams",
+                "required": true,
+                "description": "Объект уведомления. Поддерживает type, title, message, timeOut, onClick, priority"
+              }
+            ]
+          },
+          {
+            "name": "removeAll",
+            "description": "Удаляет все активные уведомления.",
+            "params": []
+          }
+        ]
+      }
+    },
+    "types": {
+      "NotificationParams": {
+        "type": "object",
+        "fields": {
+          "id": "string (генерируется автоматически)",
+          "type": "info | success | warning | error (по умолчанию 'info')",
+          "title": "string (заголовок уведомления)",
+          "message": "string (основной текст уведомления)",
+          "timeOut": "number (время автозакрытия в миллисекундах, по умолчанию 5000)",
+          "onClick": "() => void (опциональный callback при клике)",
+          "priority": "boolean (если true, уведомление отображается даже при открытом предыдущем)"
+        }
+      }
+    },
+    "examples": [
+      "import { NotificationManager, NotificationTypeMap } from '@mayao/mayao-ui/core/Notification';\n\nNotificationManager.notification({\n  title: 'Информация',\n  message: 'Info Notification',\n  type: NotificationTypeMap.Success\n});",
+      "import { NotificationManager, NotificationTypeMap } from '@mayao/mayao-ui/core/Notification';\n\nNotificationManager.notification({\n  title: 'Информация',\n  message: 'Info Notification',\n  type: NotificationTypeMap.Error\n});",
+      "import { NotificationManager, NotificationTypeMap } from '@mayao/mayao-ui/core/Notification';\n\nNotificationManager.notification({\n  title: 'Ошибка',\n  message: 'Error Notification',\n  type: NotificationTypeMap.Warning\n});",
+      "import { NotificationManager } from '@mayao/mayao-ui/core/Notification';\n\nNotificationManager.removeAll();"
+    ],
+    "props": [
+      {
+        "name": "type",
+        "type": "'info' | 'success' | 'warning' | 'error'",
+        "default": "'info'",
+        "description": "Тип уведомления, влияет на цвет и иконку."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": "undefined",
+        "description": "Заголовок уведомления, отображается жирным."
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "default": "''",
+        "description": "Основной текст уведомления."
+      },
+      {
+        "name": "timeOut",
+        "type": "number",
+        "default": "5000",
+        "description": "Время в миллисекундах до автозакрытия уведомления. 0 — не закрывать автоматически."
+      },
+      {
+        "name": "onClick",
+        "type": "() => void",
+        "default": "undefined",
+        "description": "Функция, вызываемая при клике по уведомлению."
+      },
+      {
+        "name": "priority",
+        "type": "boolean",
+        "default": "false",
+        "description": "Если true, уведомление будет отображено, даже если предыдущие ещё не скрыты."
+      }
+    ]
+  },
+  "Popup": {
+    "name": "Popup",
+    "description": "Переиспользуемый компонент всплывающей подсказки на основе Tippy.js с кастомными стилями, прокруткой и триггерами (click, focus, mouseenter).",
+    "installation": {
+      "steps": [
+        "1. Убедитесь, что установлен пакет @tippyjs/react.",
+        "2. Импортируйте компонент Popup и используйте внутри любого JSX-элемента, которому нужно добавить тултип/всплывающее окно."
+      ]
+    },
+    "usage": "<Popup content={<div>Контент</div>} trigger={TriggerType.Click}><button>Нажми</button></Popup>",
+    "props": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "default": "—",
+        "description": "Элемент, к которому будет привязан popup."
+      },
+      {
+        "name": "content",
+        "type": "ReactNode",
+        "default": "—",
+        "description": "Содержимое всплывающего окна."
+      },
+      {
+        "name": "trigger",
+        "type": "'click' | 'focus' | 'mouseenter'",
+        "default": "mouseenter",
+        "description": "Событие, вызывающее появление popup."
+      },
+      {
+        "name": "arrow",
+        "type": "boolean",
+        "default": "false",
+        "description": "Показывать ли стрелочку у popup."
+      },
+      {
+        "name": "interactive",
+        "type": "boolean",
+        "default": "false",
+        "description": "Можно ли взаимодействовать с popup (например, клик по ссылке внутри него)."
+      },
+      {
+        "name": "appendTo",
+        "type": "HTMLElement | 'parent'",
+        "default": "document.body",
+        "description": "Куда монтировать popup (например, для портала)."
+      },
+      {
+        "name": "maxWidth",
+        "type": "string | number",
+        "default": "400px",
+        "description": "Максимальная ширина popup."
+      },
+      {
+        "name": "onShow",
+        "type": "(instance: TippyInstance) => void",
+        "default": "—",
+        "description": "Вызывается при появлении popup. Автоматически добавляет scroll-слушатель, который закрывает popup."
+      },
+      {
+        "name": "onClickOutside",
+        "type": "(instance: TippyInstance) => void",
+        "default": "—",
+        "description": "Вызывается при клике вне области popup (работает только с триггером click)."
+      }
+    ],
+    "types": {
+      "TriggerType": {
+        "Click": "click",
+        "Focus": "focus",
+        "Mouseenter": "mouseenter"
+      }
+    },
+    "examples": [
+      "import { Button, ButtonType } from '@mayao/mayao-ui/core/Button';\nimport { Popup, TriggerType } from '@mayao/mayao-ui/core/Popup';\n\n<Popup\n  content={<div className=\"px-4 py-2 text-white\">Это всплывающий контент</div>}\n  trigger={TriggerType.Click}\n  arrow\n  interactive\n>\n  <Button btnType={ButtonType.Primary}>\n    Кликни для Popup\n  </Button>\n</Popup>"
+    ]
+  },
+  "Radio": {
+    "name": "Radio",
+    "description": "Кастомная радиокнопка с возможностью управления состоянием выбора и отображением подопций.",
+    "usage": "<Radio label=\"Выбрать\" isChecked={true} isDisabled={false} onChange={handleChange} />",
+    "installation": {
+      "steps": [
+        "1. Убедитесь, что стили импортированы из '~/constants' и '~/utils'.",
+        "2. Импортируйте компонент: `import { Radio } from '~/components/Radio';`"
+      ]
+    },
+    "props": [
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Текстовая подпись радиокнопки, отображается рядом."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "—",
+        "description": "Дополнительный CSS-класс контейнера радиокнопки."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": "—",
+        "description": "Блокирует взаимодействие с радиокнопкой."
+      },
+      {
+        "name": "isChecked",
+        "type": "boolean",
+        "default": "—",
+        "description": "Определяет текущее состояние: выбрана или нет."
+      },
+      {
+        "name": "isCheckedSubOptions",
+        "type": "boolean",
+        "default": "true",
+        "description": "Показывать ли подопции при выборе радиокнопки (визуально влияет на размер точки и цвет)."
+      },
+      {
+        "name": "onChange",
+        "type": "(e: React.ChangeEvent<HTMLInputElement>) => void",
+        "default": "—",
+        "description": "Обработчик изменения состояния радиокнопки."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "—",
+        "description": "Имя поля радиокнопки."
+      }
+    ],
+    "styling": {
+      "hover": "Подсветка при наведении в зависимости от состояния выбора.",
+      "disabled": "Снижение насыщенности цветов и блокировка курсора.",
+      "customShape": "Стилизация через псевдоэлементы ::before и ::after (внешнее и внутреннее кольцо)."
+    },
+    "examples": [
+      "import { useState } from 'react';\nimport { Radio } from '@mayao/mayao-ui/core/Radio';\n\nconst Example = () => {\n  const [selected, setSelected] = useState('опция1');\n\n  return (\n    <>\n      <Radio\n        label=\"Опция 1\"\n        isChecked={selected === 'опция1'}\n        isDisabled={false}\n        onChange={() => setSelected('опция1')}\n      />\n      <Radio\n        label=\"Опция 2\"\n        isChecked={selected === 'опция2'}\n        isDisabled={false}\n        onChange={() => setSelected('опция2')}\n      />\n    </>\n  );\n};",
+      "import { Radio } from '@mayao/mayao-ui/core/Radio';\n\n<Radio label=\"Отключённая опция\" isChecked={false} isDisabled />",
+      "import { Radio } from '@mayao/mayao-ui/core/Radio';\n\n<Radio label=\"Отключённый (не выбран)\" isChecked={false} isDisabled />",
+      "import { Radio } from '@mayao/mayao-ui/core/Radio';\n\n<Radio label=\"Отключённый (выбран)\" isChecked isDisabled />"
+    ]
+  },
+  "Select": {
+    "name": "Select",
+    "description": "Кастомная обёртка над react-select с поддержкой label, ошибок, асинхронной подгрузки и адаптивных стилей.",
+    "usage": "<Select name=\"priority\" label=\"Приоритет\" options={options} value={selected} onChange={handleChange} />",
+    "installation": {
+      "steps": [
+        "1. Установите зависимость: `npm install react-select`",
+        "2. Импортируйте компонент: `import { Select } from '~/components/Select';`"
+      ]
+    },
+    "props": [
+      {
+        "name": "name",
+        "type": "string",
+        "default": "—",
+        "description": "Имя поля — используется при управлении формой или для `readonlyFieldNames`."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Название поля (подпись сверху)."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "HTML id — может использоваться в тестах и для связывания с label."
+      },
+      {
+        "name": "value",
+        "type": "OptionType | OptionType[] | string | number | null",
+        "default": "—",
+        "description": "Текущее выбранное значение или массив значений для multi-селекта."
+      },
+      {
+        "name": "options",
+        "type": "OptionType[]",
+        "default": "—",
+        "description": "Список опций вида `{ value: string | number, label: string }`."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: OptionType | OptionType[] | null) => void",
+        "default": "—",
+        "description": "Колбэк при выборе опции."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает селект (сделает неактивным)."
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "default": "false",
+        "description": "Показывает индикатор загрузки вместо стрелки."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отображает поле в состоянии ошибки (красная обводка и сообщение)."
+      },
+      {
+        "name": "errorText",
+        "type": "string",
+        "default": "—",
+        "description": "Текст ошибки под полем."
+      },
+      {
+        "name": "readonlyFieldNames",
+        "type": "string[]",
+        "default": "—",
+        "description": "Названия полей, которые нельзя изменить (например, для read-only логики в форме)."
+      },
+      {
+        "name": "onScrollCallback",
+        "type": "() => void",
+        "default": "—",
+        "description": "Функция вызывается при достижении конца списка — удобно для пагинации и загрузки новых опций."
+      },
+      {
+        "name": "isMultiple",
+        "type": "boolean",
+        "default": "false",
+        "description": "Включает режим множественного выбора."
+      },
+      {
+        "name": "isSelectAllAllowed",
+        "type": "boolean",
+        "default": "false",
+        "description": "Добавляет опцию выбора всех значений (для multi-режима)."
+      },
+      {
+        "name": "onChangeInput",
+        "type": "(value: string) => void",
+        "default": "—",
+        "description": "Колбэк при изменении строки поиска в селекте."
+      },
+      {
+        "name": "isTreeSelect",
+        "type": "boolean",
+        "default": "false",
+        "description": "Режим отображения для интеграции с TreeSelect."
+      }
+    ],
+    "types": {
+      "OptionType": {
+        "value": "string | number | null",
+        "label": "string",
+        "id": "number | string (optional)"
+      }
+    },
+    "features": [
+      "📌 Стилизация по бренду (цвета, фокус, ошибки)",
+      "🧭 Поддержка Scroll-пагинации через onScrollCallback",
+      "🛠 Поддержка readonly по имени поля",
+      "🧪 Выносимые в portal меню и фиксированное позиционирование"
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Select, OptionType } from '@mayao/mayao-ui/core/Select';\n\nconst options: OptionType[] = [\n  { label: 'Опция 1', value: '1' },\n  { label: 'Опция 2', value: '2' },\n  { label: 'Опция 3', value: '3' },\n];\n\nconst Example = () => {\n  const [value, setValue] = useState<OptionType | null>(options[0]);\n\n  return (\n    <Select\n      name=\"demo-select\"\n      label=\"Выберите опцию\"\n      options={options}\n      value={value}\n      onChange={(v) => setValue(v as OptionType)}\n    />\n  );\n};"
+    ]
+  },
+  "SelectOld": {
+    "name": "SelectOld",
+    "description": "Кастомный компонент на основе react-select с поддержкой value в виде строки или массива строк. Поддерживает одиночный и множественный выбор, 'Выбрать все', а также адаптацию значений.",
+    "props": [
+      {
+        "name": "options",
+        "type": "OptionTypeOld[]",
+        "default": "—",
+        "description": "Массив опций для отображения в списке выбора."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "—",
+        "description": "Имя селекта, используется для идентификации при отправке формы."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "HTML id элемента."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Подпись для поля."
+      },
+      {
+        "name": "value",
+        "type": "OptionTypeOld | OptionTypeOld[] | string | number | null",
+        "default": "—",
+        "description": "Текущее выбранное значение. Может быть строкой/числом или объектом опции/массивом опций."
+      },
+      {
+        "name": "isMultiple",
+        "type": "boolean",
+        "default": "—",
+        "description": "Включает режим множественного выбора с чекбоксами."
+      },
+      {
+        "name": "isSelectAllAllowed",
+        "type": "boolean",
+        "default": "—",
+        "description": "Если true — позволяет выбрать все опции через 'Выбрать все'."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": "—",
+        "description": "Блокирует селект."
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "default": "—",
+        "description": "Показывает индикатор загрузки."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "—",
+        "description": "Подсвечивает селект как невалидный."
+      },
+      {
+        "name": "errorText",
+        "type": "string",
+        "default": "—",
+        "description": "Текст ошибки, отображаемый под полем."
+      },
+      {
+        "name": "readonlyFieldNames",
+        "type": "string[]",
+        "default": "—",
+        "description": "Массив имён полей, которые считаются доступными только для чтения. Значения не изменяются."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: OptionTypeOld | OptionTypeOld[] | null) => void",
+        "default": "—",
+        "description": "Колбэк, вызываемый при изменении значения."
+      },
+      {
+        "name": "onChangeInput",
+        "type": "(value: string) => void",
+        "default": "—",
+        "description": "Колбэк, вызываемый при вводе текста в поле поиска."
+      },
+      {
+        "name": "onScrollCallback",
+        "type": "() => void",
+        "default": "—",
+        "description": "Колбэк при скролле к нижней границе списка. Обычно используется для подгрузки данных."
+      },
+      {
+        "name": "onInputChange",
+        "type": "(inputValue: string) => void",
+        "default": "—",
+        "description": "Колбэк из react-select при изменении значения поиска."
+      },
+      {
+        "name": "isClearable",
+        "type": "boolean",
+        "default": "—",
+        "description": "Позволяет очистить выбранное значение (если поддерживается)."
+      },
+      {
+        "name": "isMulti",
+        "type": "boolean",
+        "default": "—",
+        "description": "Аналогично isMultiple, но используется нативный мульти-режим react-select. Обычно не нужен."
+      },
+      {
+        "name": "components",
+        "type": "any",
+        "default": "—",
+        "description": "Кастомные sub-components для react-select (Option, MenuList и т.д.)."
+      },
+      {
+        "name": "customStyles",
+        "type": "StylesConfig<T, boolean>",
+        "default": "—",
+        "description": "Переопределение стилей react-select."
+      }
+    ],
+    "optionType": {
+      "name": "OptionTypeOld",
+      "structure": {
+        "value": "string | number | null",
+        "label": "string | null",
+        "id": "string | number | null (optional)",
+        "isDisabled": "boolean (optional)"
+      }
+    },
+    "examples": [
+      "import { useState } from 'react';\nimport { SelectOld, OptionTypeOld } from '@mayao/mayao-ui/core/SelectOld';\n\nconst options: OptionTypeOld[] = [\n  { label: 'Опция 1', value: '1' },\n  { label: 'Опция 2', value: '2' },\n  { label: 'Опция 3', value: '3' },\n];\n\nconst Example = () => {\n  const [value, setValue] = useState<OptionTypeOld | null>(options[0]);\n\n  return (\n    <SelectOld\n      name=\"demo-select\"\n      label=\"Выберите опцию\"\n      options={options}\n      value={value}\n      onChange={(v) => setValue(v as OptionTypeOld)}\n    />\n  );\n};"
+    ]
+  },
+  "TextArea": {
+    "name": "TextArea",
+    "description": "Компонент для ввода многострочного текста с поддержкой валидации, автофокуса, кастомных размеров и состояний ошибок.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "Уникальный идентификатор элемента textarea."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Подпись поля ввода, отображается внутри поля до ввода текста."
+      },
+      {
+        "name": "value",
+        "type": "string | ReadonlyArray<string> | number",
+        "default": "—",
+        "description": "Значение поля ввода."
+      },
+      {
+        "name": "onChange",
+        "type": "(event: ChangeEvent<HTMLTextAreaElement>) => void",
+        "default": "—",
+        "description": "Колбэк при изменении значения."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "—",
+        "description": "Отображение состояния ошибки."
+      },
+      {
+        "name": "errorText",
+        "type": "string",
+        "default": "—",
+        "description": "Текст ошибки, отображаемый под полем."
+      },
+      {
+        "name": "resetErrorState",
+        "type": "() => void",
+        "default": "—",
+        "description": "Функция сброса состояния ошибки при вводе."
+      },
+      {
+        "name": "inputSize",
+        "type": "'S' | 'L'",
+        "default": "—",
+        "description": "Размер поля: маленький ('S') или большой ('L'). По умолчанию 'L'."
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "default": "—",
+        "description": "URL изображения, отображаемого внутри поля слева."
+      },
+      {
+        "name": "icon",
+        "type": "IconElement",
+        "default": "—",
+        "description": "Иконка, отображаемая внутри поля справа."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "—",
+        "description": "Дополнительный CSS-класс для обертки компонента."
+      },
+      {
+        "name": "isCapitalizeFirstLetter",
+        "type": "boolean",
+        "default": "—",
+        "description": "Автоматически делать первую букву заглавной."
+      },
+      {
+        "name": "isLabelFixed",
+        "type": "boolean",
+        "default": "—",
+        "description": "Фиксированное положение лейбла над полем."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { TextArea, TextAreaSizes } from '@mayao/mayao-ui/core/TextArea';\n\nconst Example = () => {\n  const [bio, setBio] = useState('');\n\n  return (\n    <TextArea\n      id=\"bio\"\n      label=\"Ваша биография\"\n      value={bio}\n      onChange={(e) => setBio(e.target.value)}\n      hasError={bio.length > 100}\n      errorText={bio.length > 100 ? 'Max 100 characters' : ''}\n      inputSize={TextAreaSizes.L}\n      isCapitalizeFirstLetter\n      placeholder=\"Write something about yourself\"\n    />\n  );\n};",
+      "import { useState } from 'react';\nimport { TextArea, TextAreaSizes } from '@mayao/mayao-ui/core/TextArea';\n\nconst Example = () => {\n  const [note, setNote] = useState('');\n\n  return (\n    <TextArea\n      id=\"short-note\"\n      label=\"Короткая записка\"\n      value={note}\n      onChange={(e) => setNote(e.target.value)}\n      hasError={note.length > 7}\n      errorText={note.length > 7 ? 'Максимально 7 знаков' : ''}\n      inputSize={TextAreaSizes.L}\n      isLabelFixed\n    />\n  );\n};"
+    ]
+  },
+  "TreeSelect": {
+    "name": "TreeSelect",
+    "description": "Древовидный Select-компонент, основанный на SelectOld, поддерживает отображение и выбор вложенных опций.",
+    "props": [
+      {
+        "name": "options",
+        "type": "TreeOptionType[]",
+        "default": "—",
+        "description": "Массив опций дерева с возможной вложенностью через поле `options`."
+      },
+      {
+        "name": "value",
+        "type": "TreeOptionType | TreeOptionType[] | string | string[] | null",
+        "default": "—",
+        "description": "Текущее выбранное значение."
+      },
+      {
+        "name": "onChange",
+        "type": "(selectedOption: TreeOptionType | TreeOptionType[] | null) => void",
+        "default": "—",
+        "description": "Колбэк при выборе опции."
+      },
+      {
+        "name": "selectOnlyLastLevel",
+        "type": "boolean",
+        "default": "—",
+        "description": "Если true — разрешён выбор только конечных узлов дерева."
+      },
+      {
+        "name": "selectLevelFrom",
+        "type": "number",
+        "default": "—",
+        "description": "Минимальный уровень дерева, с которого разрешён выбор (0 — верхний уровень)."
+      },
+      {
+        "name": "components",
+        "type": "object",
+        "default": "—",
+        "description": "Переопределение компонентов react-select, например, кастомная отрисовка Option или MenuList."
+      },
+      {
+        "name": "isMultiple",
+        "type": "boolean",
+        "default": "—",
+        "description": "Разрешить множественный выбор (использует isMulti)."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": "—",
+        "description": "Название поля, отображается как плейсхолдер или лейбл."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": "—",
+        "description": "Имя поля ввода."
+      },
+      {
+        "name": "hasError",
+        "type": "boolean",
+        "default": "—",
+        "description": "Состояние ошибки компонента."
+      },
+      {
+        "name": "errorText",
+        "type": "string",
+        "default": "—",
+        "description": "Текст ошибки, отображается под полем."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": "—",
+        "description": "HTML id элемента."
+      },
+      {
+        "name": "isDisabled",
+        "type": "boolean",
+        "default": "—",
+        "description": "Блокирует компонент."
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "default": "—",
+        "description": "Показывает состояние загрузки."
+      },
+      {
+        "name": "isSelectAllAllowed",
+        "type": "boolean",
+        "default": "—",
+        "description": "Разрешает опцию «выбрать все» в мультивыборе."
+      },
+      {
+        "name": "readonlyFieldNames",
+        "type": "string[]",
+        "default": "—",
+        "description": "Список полей только для чтения."
+      },
+      {
+        "name": "onChangeInput",
+        "type": "(value: string) => void",
+        "default": "—",
+        "description": "Колбэк при вводе строки поиска."
+      },
+      {
+        "name": "onScrollCallback",
+        "type": "() => void",
+        "default": "—",
+        "description": "Вызывается при достижении конца списка."
+      },
+      {
+        "name": "onInputChange",
+        "type": "(inputValue: string) => void",
+        "default": "—",
+        "description": "Колбэк react-select при изменении текста поиска."
+      },
+      {
+        "name": "isClearable",
+        "type": "boolean",
+        "default": "—",
+        "description": "Позволяет очистить выбранное значение."
+      },
+      {
+        "name": "isMulti",
+        "type": "boolean",
+        "default": "—",
+        "description": "Нативный мульти-режим react-select."
+      },
+      {
+        "name": "customStyles",
+        "type": "StylesConfig<TreeOptionType, boolean>",
+        "default": "—",
+        "description": "Переопределение стилей react-select."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { TreeSelect, TreeOptionType } from '@mayao/mayao-ui/core/TreeSelect';\n\nconst options: TreeOptionType[] = [\n  {\n    value: 'фрукты',\n    label: 'Фрукты',\n    level: 0,\n    options: [\n      {\n        value: 'цитрусовые',\n        label: 'Цитрусовые',\n        level: 1,\n        options: [\n          { value: 'апельсин', label: 'Апельсин', level: 2 },\n          { value: 'лимон', label: 'Лимон', level: 2 }\n        ]\n      },\n      {\n        value: 'ягоды',\n        label: 'Ягоды',\n        level: 1,\n        options: [\n          {\n            value: 'клубника',\n            label: 'Клубника',\n            level: 2,\n            options: [{ value: 'земляника', label: 'Земляника', level: 3 }]\n          },\n          { value: 'черника', label: 'Черника', level: 2 }\n        ]\n      }\n    ]\n  },\n  {\n    value: 'овощи',\n    label: 'Овощи',\n    level: 0,\n    options: [\n      {\n        value: 'листовые',\n        label: 'Листовые овощи',\n        level: 1,\n        options: [\n          { value: 'шпинат', label: 'Шпинат', level: 2 },\n          { value: 'салат', label: 'Салат', level: 2 }\n        ]\n      },\n      {\n        value: 'корнеплоды',\n        label: 'Корнеплоды',\n        level: 1,\n        options: [\n          { value: 'морковь', label: 'Морковь', level: 2 },\n          { value: 'свёкла', label: 'Свёкла', level: 2 }\n        ]\n      }\n    ]\n  }\n];\n\nconst Example = () => {\n  const [value, setValue] = useState<TreeOptionType | null>(null);\n\n  return (\n    <TreeSelect\n      name=\"tree-select\"\n      label=\"Выберите элемент\"\n      value={value}\n      options={options}\n      onChange={setValue}\n      selectOnlyLastLevel\n    />\n  );\n};"
+    ]
+  },
+  "Pagination": {
+    "name": "Pagination",
+    "description": "Компонент пагинации для постраничной навигации по данным с поддержкой кастомизации, отображением информации и управления размером страницы.",
+    "props": [
+      {
+        "name": "page",
+        "type": "number",
+        "default": "0",
+        "description": "Текущий выбранный номер страницы (отсчёт с 0)."
+      },
+      {
+        "name": "totalPages",
+        "type": "number",
+        "default": "1",
+        "description": "Общее количество страниц для навигации."
+      },
+      {
+        "name": "totalElements",
+        "type": "number",
+        "default": "0",
+        "description": "Общее количество элементов во всех страницах (например, строк в таблице)."
+      },
+      {
+        "name": "onChange",
+        "type": "(page: number) => void",
+        "default": "—",
+        "description": "Функция-обработчик смены страницы."
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "default": "10",
+        "description": "Текущее выбранное количество элементов на странице."
+      },
+      {
+        "name": "onPageSizeChange",
+        "type": "(size: number) => void",
+        "default": "—",
+        "description": "Функция-обработчик смены количества элементов на странице."
+      },
+      {
+        "name": "pageSizeOptions",
+        "type": "number[]",
+        "default": "[10, 25, 50]",
+        "description": "Массив опций для выбора размера страницы."
+      },
+      {
+        "name": "siblingCount",
+        "type": "number",
+        "default": "1",
+        "description": "Число соседних страниц, отображаемых вокруг активной страницы."
+      },
+      {
+        "name": "boundaryCount",
+        "type": "number",
+        "default": "1",
+        "description": "Число граничных страниц (слева и справа), всегда видимых в пагинации."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "—",
+        "description": "Дополнительные CSS-классы для корневого элемента."
+      },
+      {
+        "name": "style",
+        "type": "React.CSSProperties",
+        "default": "—",
+        "description": "Inline-стили для корневого элемента."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport { Pagination } from '@mayao/mayao-ui/core/Pagination';\n\nconst Example = () => {\n  const [page, setPage] = useState(2);\n  const [pageSize, setPageSize] = useState(10);\n  const totalPages = 36;\n  const totalElements = 354;\n\n  return (\n    <div>\n      <Pagination\n        page={page}\n        totalPages={totalPages}\n        totalElements={totalElements}\n        pageSize={pageSize}\n        onChange={setPage}\n        onPageSizeChange={setPageSize}\n        pageSizeOptions={[10, 25, 50]}\n        siblingCount={1}\n        boundaryCount={1}\n      />\n      <div>\n        Текущая страница: <b>{page + 1}</b>, Размер страницы: <b>{pageSize}</b>\n      </div>\n    </div>\n  );\n};"
+    ]
+  },
+  "DateTimePickerV2": {
+    "name": "DateTimePickerV2",
+    "description": "Компонент выбора даты и времени с поддержкой русской локализации, быстрого выбора 'Сейчас', режима только даты, форматирования и ручного ввода времени.",
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": "undefined",
+        "description": "Уникальный идентификатор поля ввода."
+      },
+      {
+        "name": "value",
+        "type": "Date | string | null",
+        "default": "null",
+        "description": "Текущее выбранное значение (Date, строка или null)."
+      },
+      {
+        "name": "onChange",
+        "type": "(value: Date | string | null) => void",
+        "default": "—",
+        "description": "Функция, вызываемая при изменении значения."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "default": "\"ДД.ММ.ГГГГ ЧЧ:ММ\"",
+        "description": "Плейсхолдер для поля ввода."
+      },
+      {
+        "name": "icon",
+        "type": "React.ComponentType<any>",
+        "default": "иконка календаря по умолчанию",
+        "description": "React-компонент SVG-иконки для отображения в поле выбора даты."
+      },
+      {
+        "name": "iconSize",
+        "type": "number",
+        "default": "24",
+        "description": "Размер иконки календаря в пикселях."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "default": "false",
+        "description": "Отключает выбор даты/времени."
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "default": "false",
+        "description": "Делает поле обязательным для заполнения (атрибут required)."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "default": "undefined",
+        "description": "Дополнительные CSS-классы для контейнера компонента."
+      },
+      {
+        "name": "startOfDay",
+        "type": "boolean",
+        "default": "false",
+        "description": "Устанавливать 00:00 при выборе даты."
+      },
+      {
+        "name": "endOfDay",
+        "type": "boolean",
+        "default": "false",
+        "description": "Устанавливать 23:59 при выборе даты."
+      },
+      {
+        "name": "timePicker",
+        "type": "boolean",
+        "default": "true",
+        "description": "Показывать выбор времени (часы и минуты)."
+      },
+      {
+        "name": "format",
+        "type": "'date' | 'datetime'",
+        "default": "'datetime'",
+        "description": "Режим отображения: только дата или дата+время."
+      },
+      {
+        "name": "stringValue",
+        "type": "boolean",
+        "default": "false",
+        "description": "Если true — onChange вернет строку вида 'yyyy-MM-dd HH:mm', иначе Date."
+      }
+    ],
+    "examples": [
+      "import { useState } from 'react';\nimport Calendar from '@/assets/icons/bc_calendarV2.svg?react';\nimport { DateTimePickerV2 } from '@mayao/mayao-ui/core/DateTimePickerV2';\n\nconst Example = () => {\n  const [value, setValue] = useState<Date | null>(null);\n\n  return (\n    <div className=\"mr-3.5 flex flex-col items-start gap-2\">\n      <DateTimePickerV2\n        value={value}\n        onChange={setValue}\n        iconSize={24}\n        placeholder=\"ДД.ММ.ГГГГ ЧЧ:ММ\"\n        format=\"datetime\"\n        icon={Calendar}\n      />\n      <div className=\"text-muted-foreground text-xs\">\n        <b>Текущее значение:</b>{' '}\n        {value ? `${value.toLocaleDateString()} ${value.toTimeString().slice(0, 5)}` : '(не выбрано)'}\n      </div>\n    </div>\n  );\n};",
+      "import { useState } from 'react';\nimport { DateTimePickerV2 } from '@mayao/mayao-ui/core/DateTimePickerV2';\n\nconst Example = () => {\n  const [value, setValue] = useState<Date | null>(null);\n\n  return (\n    <DateTimePickerV2\n      value={value}\n      onChange={setValue}\n      format=\"date\"\n      placeholder=\"ДД.ММ.ГГГГ\"\n      timePicker={false}\n    />\n  );\n};",
+      "import { useState } from 'react';\nimport { DateTimePickerV2 } from '@mayao/mayao-ui/core/DateTimePickerV2';\n\nconst Example = () => {\n  const [value, setValue] = useState<Date | null>(null);\n\n  return (\n    <DateTimePickerV2\n      value={value}\n      onChange={setValue}\n      showButton\n      disabled\n      placeholder=\"Выберите дату и время\"\n    />\n  );\n};"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-import rawComponents from '../../../src/data/componentsData.json' with { type: 'json' };
+import rawComponents from '../data/componentsData.json' with { type: 'json' };
 
 import { ComponentDoc, componentDocSchema } from '../schemas/component.js';
 

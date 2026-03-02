@@ -1,4 +1,4 @@
-import rawOnboarding from '../../../src/data/onboardingData.json' with { type: 'json' };
+import rawOnboarding from '../data/onboardingData.json' with { type: 'json' };
 
 import { ONBOARDING_ROUTE_BY_KEY } from '../config.js';
 import { OnboardingGuide, onboardingGuideSchema } from '../schemas/onboarding.js';
