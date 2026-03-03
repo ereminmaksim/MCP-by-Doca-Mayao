@@ -1,5 +1,4 @@
 import rawComponents from '../data/componentsData.json' with { type: 'json' };
-
 import { ComponentDoc, componentDocSchema } from '../schemas/component.js';
 
 const normalize = (value: string) => value.trim().toLowerCase();
@@ -37,7 +36,11 @@ export const listComponents = () => componentDocs;
 
 export const getComponentByNameOrSlug = (nameOrSlug: string) => {
   const normalized = normalize(nameOrSlug);
-  return componentsBySlug.get(normalized) ?? componentDocs.find((component) => normalize(component.name) === normalized) ?? null;
+  return (
+    componentsBySlug.get(normalized) ??
+    componentDocs.find((component) => normalize(component.name) === normalized) ??
+    null
+  );
 };
 
 export const searchComponents = (query: string) => {
@@ -115,14 +118,16 @@ const scoreRecommendation = (component: ComponentDoc, task: string, constraints:
 
   if (signals.has('date') && signals.has('range') && /daterange|range/i.test(componentText)) score += 25;
   if (signals.has('date') && signals.has('input') && /datetextinput/i.test(componentText)) score += 20;
-  if (signals.has('input') && /textarea/i.test(componentText)) score += haystack.includes('длин') || haystack.includes('long') ? 20 : 8;
+  if (signals.has('input') && /textarea/i.test(componentText))
+    score += haystack.includes('длин') || haystack.includes('long') ? 20 : 8;
   if (signals.has('select') && /select/i.test(componentText)) score += 18;
   if (signals.has('modal') && /confirm/i.test(componentText)) score += 16;
 
   if (signals.has('date') && !positiveSignalMatchers.date.test(componentText)) score -= 35;
   if (signals.has('date') && /select|dropdown|tree/i.test(componentText)) score -= 24;
   if ((haystack.includes('длин') || haystack.includes('long')) && /textarea/i.test(componentText)) score += 30;
-  if ((haystack.includes('длин') || haystack.includes('long')) && !/textarea|editor|text/i.test(componentText)) score -= 18;
+  if ((haystack.includes('длин') || haystack.includes('long')) && !/textarea|editor|text/i.test(componentText))
+    score -= 18;
   if (signals.has('input') && !positiveSignalMatchers.input.test(componentText)) score -= 10;
 
   for (const prop of component.props) {
@@ -196,7 +201,8 @@ export const recommendComponents = (task: string, constraints: string[] = []) =>
   }
 
   const bestScore = ranked[0].score;
-  const dynamicThreshold = signals.size > 0 ? Math.max(minimumScore, bestScore - 28) : Math.max(minimumScore, bestScore - 40);
+  const dynamicThreshold =
+    signals.size > 0 ? Math.max(minimumScore, bestScore - 28) : Math.max(minimumScore, bestScore - 40);
   const hasStrongLeader = bestScore >= 45;
 
   const signalFiltered =

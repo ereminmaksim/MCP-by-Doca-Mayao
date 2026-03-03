@@ -1,6 +1,5 @@
-import rawOnboarding from '../data/onboardingData.json' with { type: 'json' };
-
 import { ONBOARDING_ROUTE_BY_KEY } from '../config.js';
+import rawOnboarding from '../data/onboardingData.json' with { type: 'json' };
 import { OnboardingGuide, onboardingGuideSchema } from '../schemas/onboarding.js';
 
 type RawOnboardingDetail = {
@@ -82,7 +81,9 @@ export const listOnboardingGuides = () => onboardingGuides;
 
 export const getOnboardingGuideByKey = (service: string) => {
   const normalized = normalize(service);
-  return onboardingByKey.get(normalized) ?? onboardingGuides.find((guide) => normalize(guide.name) === normalized) ?? null;
+  return (
+    onboardingByKey.get(normalized) ?? onboardingGuides.find((guide) => normalize(guide.name) === normalized) ?? null
+  );
 };
 
 export const searchOnboardingGuides = (query: string) => {

@@ -33,24 +33,24 @@ For stdio clients:
 npm run dev:stdio
 ```
 
-## Railway Deploy
+## Production Deploy
 
 Recommended setup:
 
-1. Create a new Railway service from this repository.
+1. Create a new deployment service from this repository.
 2. Use the repository root as the service root directory.
-3. Railway will use `nixpacks.toml` and run:
+3. The deployment platform should use `nixpacks.toml` and run:
    - `npm install`
    - `npm run typecheck`
    - `npm run build`
    - `npm run start`
 4. Expose the generated public domain.
-5. Set `MCP_BASE_URL` to the public Railway domain after the first deploy.
+5. Set `MCP_BASE_URL` to the public service domain after the first deploy.
 
 Environment variables:
 
-- `PORT` provided by Railway
-- `MCP_BASE_URL` set to your public Railway domain
+- `PORT` provided by the platform
+- `MCP_BASE_URL` set to your public service domain
 
 Suggested value for `MCP_BASE_URL`:
 
@@ -68,6 +68,60 @@ MCP HTTP endpoint:
 
 ```text
 POST /mcp
+```
+
+`POST /mcp` is not a plain REST endpoint. The client must first send an MCP
+`initialize` request. After that, the server returns a session and expects the
+client to continue with the `mcp-session-id` header.
+
+Minimal manual initialize example:
+
+```bash
+curl -i \
+  -X POST https://your-service-name.up.railway.app/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {
+      "protocolVersion": "2024-11-05",
+      "capabilities": {},
+      "clientInfo": {
+        "name": "manual-check",
+        "version": "1.0.0"
+      }
+    }
+  }'
+```
+
+After that, use the returned `mcp-session-id` in the next request:
+
+```bash
+curl -i \
+  -X POST https://your-service-name.up.railway.app/mcp \
+  -H "Content-Type: application/json" \
+  -H "mcp-session-id: <session-id-from-initialize-response>" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list",
+    "params": {}
+  }'
+```
+
+If you call `POST /mcp` without `initialize` and without `mcp-session-id`, the
+server will return:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32000,
+    "message": "Bad Request: missing MCP session initialization"
+  },
+  "id": null
+}
 ```
 
 Verification checklist:
@@ -90,6 +144,6 @@ https://your-service-name.up.railway.app/mcp
 
 ## Notes
 
-- Keep the site on Netlify and deploy this repository separately on Railway.
+- Keep the site and this repository deployed as separate services.
 - This package is intentionally read-only and uses project JSON data as its source of truth.
 - For MCP clients that support stdio, use `npm run start:stdio` instead of HTTP.
