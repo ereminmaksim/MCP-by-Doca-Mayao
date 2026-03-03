@@ -147,3 +147,27 @@ https://your-service-name.up.railway.app/mcp
 - Keep the site and this repository deployed as separate services.
 - This package is intentionally read-only and uses project JSON data as its source of truth.
 - For MCP clients that support stdio, use `npm run start:stdio` instead of HTTP.
+
+## Security
+
+This server now includes a basic hardening layer for public MCP access:
+
+- request body size limit for JSON payloads
+- in-memory rate limiting per client IP
+- session TTL with cleanup for stale MCP sessions
+- origin allow-list support through `MCP_ALLOWED_ORIGINS`
+- security headers on HTTP responses
+- structured audit log events for rejected requests, rate limits, session lifecycle and internal errors
+
+Optional environment variables:
+
+- `MCP_BODY_LIMIT`
+- `MCP_SESSION_TTL_MS`
+- `MCP_RATE_LIMIT_WINDOW_MS`
+- `MCP_RATE_LIMIT_MAX_REQUESTS`
+- `MCP_ALLOWED_ORIGINS`
+- `MCP_AUDIT_LOG_ENABLED`
+
+These controls reduce abuse and make incidents easier to audit, but they do not
+replace infrastructure-level protection such as HTTPS, deployment isolation,
+platform firewalling and secret hygiene.

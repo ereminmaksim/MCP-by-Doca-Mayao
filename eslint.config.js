@@ -31,6 +31,7 @@ export default [
       'prettier/prettier': 'error',
       'no-console': ['error', { allow: ['log', 'warn', 'error'] }],
       'no-undef': 'off',
+      'no-unused-vars': 'off',
       'import/order': [
         'error',
         {
