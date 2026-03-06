@@ -1,7 +1,8 @@
 export const SERVER_NAME = 'mayao-mcp-server';
 export const SERVER_VERSION = '0.1.0';
 export const DEFAULT_PORT = Number(process.env.PORT || 3001);
-export const DEFAULT_BASE_URL = process.env.MCP_BASE_URL || `http://localhost:${DEFAULT_PORT}`;
+export const MCP_BASE_URL = process.env.MCP_BASE_URL?.trim();
+export const DEFAULT_BASE_URL = MCP_BASE_URL || `http://localhost:${DEFAULT_PORT}`;
 export const MCP_BODY_LIMIT = process.env.MCP_BODY_LIMIT || '128kb';
 export const MCP_SESSION_TTL_MS = Number(process.env.MCP_SESSION_TTL_MS || 1000 * 60 * 15);
 export const MCP_RATE_LIMIT_WINDOW_MS = Number(process.env.MCP_RATE_LIMIT_WINDOW_MS || 60_000);
