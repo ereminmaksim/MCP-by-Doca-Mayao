@@ -192,9 +192,35 @@ Optional environment variables:
 - `MCP_SESSION_TTL_MS`
 - `MCP_RATE_LIMIT_WINDOW_MS`
 - `MCP_RATE_LIMIT_MAX_REQUESTS`
+- `MCP_MAX_IN_FLIGHT`
+- `MCP_REQUEST_TIMEOUT_MS`
+- `MCP_CIRCUIT_BREAKER_WINDOW_MS`
+- `MCP_CIRCUIT_BREAKER_ERROR_THRESHOLD`
+- `MCP_CIRCUIT_BREAKER_COOLDOWN_MS`
+- `MCP_ALERT_WINDOW_MS`
+- `MCP_ALERT_RPS_THRESHOLD`
+- `MCP_ALERT_429_THRESHOLD`
+- `MCP_ALERT_5XX_THRESHOLD`
+- `MCP_METRICS_TOKEN` (optional token for `GET /metrics`)
 - `MCP_ALLOWED_ORIGINS`
 - `MCP_AUDIT_LOG_ENABLED`
 
 These controls reduce abuse and make incidents easier to audit, but they do not
 replace infrastructure-level protection such as HTTPS, deployment isolation,
 platform firewalling and secret hygiene.
+
+## Monitoring and Alerts
+
+- `GET /metrics` returns rolling counters for requests, RPS, `429`, `5xx`, in-flight requests and circuit breaker state.
+- If `MCP_METRICS_TOKEN` is set, clients must pass `x-metrics-token: <token>` to access `/metrics`.
+- The server writes structured `mcp-audit` events:
+  - `alert_triggered` when thresholds for RPS / `429` / `5xx` are exceeded
+  - `concurrency_limited` when in-flight limit is reached
+  - `request_timeout`, `circuit_opened`, `circuit_rejected`
+
+Recommended Railway alert policies:
+
+1. Alert on `alert_triggered` events in logs.
+2. Alert when `5xx` rate exceeds baseline for 5 minutes.
+3. Alert when `429` count spikes unexpectedly.
+4. Alert when `rps` grows above normal traffic envelope.
