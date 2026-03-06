@@ -45,7 +45,7 @@ Recommended setup:
    - `npm run build`
    - `npm run start`
 4. Expose the generated public domain.
-5. Set `MCP_BASE_URL` to the public service domain after the first deploy.
+5. Set `MCP_BASE_URL` to the public service domain.
 
 Environment variables:
 
@@ -70,9 +70,16 @@ MCP HTTP endpoint:
 POST /mcp
 ```
 
-`POST /mcp` is not a plain REST endpoint. The client must first send an MCP
-`initialize` request. After that, the server returns a session and expects the
-client to continue with the `mcp-session-id` header.
+`POST /mcp` is not a plain REST endpoint. The client must:
+
+1. send `initialize`
+2. send `notifications/initialized`
+3. continue requests with `mcp-session-id`
+
+For MCP requests, this server expects:
+
+- `Content-Type: application/json`
+- `Accept: application/json, text/event-stream`
 
 Minimal manual initialize example:
 
@@ -80,12 +87,13 @@ Minimal manual initialize example:
 curl -i \
   -X POST https://your-service-name.up.railway.app/mcp \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
   -d '{
     "jsonrpc": "2.0",
     "id": 1,
-    "method": "initialize",
-    "params": {
-      "protocolVersion": "2024-11-05",
+      "method": "initialize",
+      "params": {
+      "protocolVersion": "2025-03-26",
       "capabilities": {},
       "clientInfo": {
         "name": "manual-check",
@@ -95,12 +103,28 @@ curl -i \
   }'
 ```
 
-After that, use the returned `mcp-session-id` in the next request:
+Then send initialized notification with the returned `mcp-session-id`:
 
 ```bash
 curl -i \
   -X POST https://your-service-name.up.railway.app/mcp \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -H "mcp-session-id: <session-id-from-initialize-response>" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "notifications/initialized",
+    "params": {}
+  }'
+```
+
+Then call methods like `tools/list` with the same session header:
+
+```bash
+curl -i \
+  -X POST https://your-service-name.up.railway.app/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
   -H "mcp-session-id: <session-id-from-initialize-response>" \
   -d '{
     "jsonrpc": "2.0",
@@ -141,6 +165,9 @@ After that, connect your MCP client to:
 ```text
 https://your-service-name.up.railway.app/mcp
 ```
+
+If `GET /` returns endpoint URLs with `localhost`, fix `MCP_BASE_URL` in your
+deployment environment and redeploy.
 
 ## Notes
 

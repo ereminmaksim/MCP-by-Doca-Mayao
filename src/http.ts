@@ -5,6 +5,7 @@ import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import express from 'express';
 
 import {
+  MCP_BASE_URL,
   DEFAULT_BASE_URL,
   DEFAULT_PORT,
   MCP_BODY_LIMIT,
@@ -39,15 +40,37 @@ const rateLimiter = new InMemoryRateLimiter();
 const allowedOrigins = parseAllowedOrigins();
 const sessions = createSessionStore<StreamableHTTPServerTransport>();
 
-app.get('/', (_req, res) => {
+const stripTrailingSlash = (value: string) => value.replace(/\/+$/, '');
+
+const resolvePublicBaseUrl = (req: express.Request) => {
+  if (MCP_BASE_URL) {
+    return stripTrailingSlash(MCP_BASE_URL);
+  }
+
+  const forwardedProto = req.header('x-forwarded-proto');
+  const forwardedHost = req.header('x-forwarded-host');
+  if (forwardedProto && forwardedHost) {
+    return `${forwardedProto}://${forwardedHost}`;
+  }
+
+  const host = req.header('host');
+  if (host) {
+    return `${req.protocol}://${host}`;
+  }
+
+  return stripTrailingSlash(DEFAULT_BASE_URL);
+};
+
+app.get('/', (req, res) => {
+  const baseUrl = resolvePublicBaseUrl(req);
   res.json({
     service: SERVER_NAME,
     version: SERVER_VERSION,
     status: 'ok',
     endpoints: {
-      root: `${DEFAULT_BASE_URL}/`,
-      health: `${DEFAULT_BASE_URL}/health`,
-      mcp: `${DEFAULT_BASE_URL}/mcp`,
+      root: `${baseUrl}/`,
+      health: `${baseUrl}/health`,
+      mcp: `${baseUrl}/mcp`,
     },
   });
 });
